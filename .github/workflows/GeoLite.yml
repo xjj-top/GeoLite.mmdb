@@ -47,9 +47,9 @@ jobs:
           mkdir -p download
           
           # Download from original repo's latest release
-          wget -q --content-disposition https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-City.mmdb -O download/GeoLite2-City.mmdb
-          wget -q --content-disposition https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-Country.mmdb -O download/GeoLite2-Country.mmdb
-          wget -q --content-disposition https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-ASN.mmdb -O download/GeoLite2-ASN.mmdb
+          wget --content-disposition https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-City.mmdb -O download/GeoLite2-City.mmdb
+          wget --content-disposition https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-Country.mmdb -O download/GeoLite2-Country.mmdb
+          wget --content-disposition https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-ASN.mmdb -O download/GeoLite2-ASN.mmdb
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
