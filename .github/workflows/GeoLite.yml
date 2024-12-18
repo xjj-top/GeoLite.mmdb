@@ -31,8 +31,8 @@ name: Update GeoLite2 Database
 
 on:
   schedule:
-    # Original repo runs at 02:00 UTC, so we'll run at 03:00 UTC
-    - cron: '0 2 */3 * *'
+    # Original repo runs at 02:00 UTC, so we'll run at 05:00 UTC
+    - cron: '0 5 */3 * *'
   workflow_dispatch:
 
 jobs:
@@ -44,14 +44,12 @@ jobs:
 
       - name: Download GeoLite2 Databases
         run: |
-          VERSION=$(date +%Y.%m.%d)
           mkdir -p download
           
           # Download from original repo's latest release
-          wget -q https://github.com/P3TERX/GeoLite.mmdb/releases/download/${VERSION}/GeoLite2-ASN.mmdb -O download/GeoLite2-ASN.mmdb
-          wget -q https://github.com/P3TERX/GeoLite.mmdb/releases/download/${VERSION}/GeoLite2-City.mmdb -O download/GeoLite2-City.mmdb
-          wget -q https://github.com/P3TERX/GeoLite.mmdb/releases/download/${VERSION}/GeoLite2-Country.mmdb -O download/GeoLite2-Country.mmdb
-
+          wget -q --content-disposition https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-City.mmdb -O download/GeoLite2-City.mmdb
+          wget -q --content-disposition https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-Country.mmdb -O download/GeoLite2-Country.mmdb
+          wget -q --content-disposition https://github.com/P3TERX/GeoLite.mmdb/releases/latest/download/GeoLite2-ASN.mmdb -O download/GeoLite2-ASN.mmdb
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
